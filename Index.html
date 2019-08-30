@@ -6,8 +6,200 @@
 	</head>
 	<body>
 		<script>
+
+			// Burgers menu
 			
+		const sizeSmall = {
+			calories: 100,
+			price: 70,
+			weight: 125,
+		}
+
+		const sizeBig = {
+			calories: 200,
+			price: 140,
+			weight: 250,
+		}
+
+		const chikenCotlet = {
+			calories: 80,
+			price: 50,
+			weight: 80,
+		}
+
+		const beefCotlet = {
+			calories: 90,
+			price: 50,
+			weight: 80,
+		}
+
+		const cheese = {
+			calories: 30,
+			price: 10,
+			weight: 20,
+		}
+
+
+		const potato = {
+			calories: 50,
+			price: 20,
+			weight: 20,
+		}
+
+		const salat = {
+			calories: 5,
+			price: 5,
+			weight: 2,
+		}
+
+		const mayo = {
+			calories: 30,
+			price: 10,
+			weight: 5,
+		}
+
+		const ketch = {
+			calories: 25,
+			price: 10,
+			weight: 5,
+		}
+
+		function Hamburger(size) {
+			this.size = size;
+			this.topping = [];
+			this.stuffing = [
+				{
+					cotlet: 'chicken',
+					calories: 80,
+					price: 50,
+					weight: 80,}
+			];
+		}
+
+
+
+
+
+
+		function Cheeseburger(size) {
+			this.size = size;
+			this.topping = [];
+			this.stuffing = [
+				{
+					cotlet: 'chicken',
+					calories: 80,
+					price: 50,
+					weight: 80,
+				},
+
+				{
+					cotlet: 'cheese',
+					calories: 30,
+					price: 10,
+					weight: 20,
+
+				}
 			
+			];
+		}
+
+
+		Hamburger.prototype.addStuffing = function(ingr) {
+			this.stuffing.push(ingr)
+		}
+
+		Hamburger.prototype.addTopping = function(ingr) {
+			this.topping.push(ingr)
+		}
+
+		Hamburger.prototype.getPrice = function() {
+			let price = 0;
+			price += this.size.price;
+
+			let stuffPrice = this.stuffing.reduce(function(accum,item) {
+				accum += item['price'];
+				return accum
+			},0);
+
+			let toppingPrice = this.topping.reduce(function(accum,item) {
+				accum += item['price'];
+				return accum
+			},0);
+
+			return price + stuffPrice + toppingPrice
+		}
+
+
+
+
+
+
+
+
+		Hamburger.prototype.getCalories = function() {
+			let price = 0;
+			price += this.size.calories;
+
+			let stuffCalories = this.stuffing.reduce(function(accum,item) {
+				accum += item['calories'];
+				return accum
+			},0);
+
+			let toppingCalories = this.topping.reduce(function(accum,item) {
+				accum += item['calories'];
+				return accum
+			},0);
+
+			return price + stuffCalories + toppingCalories
+		}
+
+		Hamburger.prototype.getWeight = function() {
+			let price = 0;
+			price += this.size.weight;
+
+			let stuffWeight = this.stuffing.reduce(function(accum,item) {
+				accum += item['weight'];
+				return accum
+			},0);
+
+			let toppingWeight = this.topping.reduce(function(accum,item) {
+				accum += item['weight'];
+				return accum
+			},0);
+
+			return price + stuffWeight + toppingWeight
+		}
+
+		Cheeseburger.prototype = Object.create(Hamburger.prototype)
+
+
+
+
+		var hamburger = new Hamburger(sizeBig);
+		var cheeseburger = new Cheeseburger(sizeSmall);
+
+		hamburger.addStuffing(potato);
+		hamburger.addStuffing(salat);
+		hamburger.addTopping(mayo);
+		hamburger.addTopping(ketch);
+		console.log(hamburger.getPrice());
+		console.log(hamburger.getCalories());
+		console.log(hamburger.getWeight());
+
+		console.log(hamburger);
+
+
+		cheeseburger.addTopping(mayo);
+		cheeseburger.addTopping(ketch);
+		cheeseburger.addTopping(ketch);
+		console.log(cheeseburger.getPrice());
+		console.log(hamburger.getCalories());
+		console.log(hamburger.getWeight());
+		cheeseburger.addTopping(mayo);
+		console.log(cheeseburger.getPrice());
+		console.log(hamburger.getCalories());
+		console.log(hamburger.getWeight());
+		console.log(cheeseburger);
 		</script>
 		
 	</body>
